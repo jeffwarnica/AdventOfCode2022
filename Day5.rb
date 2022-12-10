@@ -5,13 +5,13 @@
 
 # After: "=" is a lazy and shallow copy. I could have
 #        deep cloned stack_pt2 from stack_pt1 with
-#        stack_pt2 = stack_pt1.clone.map(&:clone) 
+#        stack_pt2 = stack_pt1.clone.map(&:clone)
 #        and saved a few lines generating both.
 def printStacks()
-    for s in 1..9 
+    for s in 1..9
         puts "stack_pt1[#{s}]: #{$stack_pt1[s]}"
     end
-    for s in 1..9 
+    for s in 1..9
         puts "stack_pt2[#{s}]: #{$stack_pt2[s]}"
     end
 end
@@ -22,8 +22,8 @@ x=8
 $stack_pt1=[]
 $stack_pt2=[]
 mode = "stacks"
-DATA.each_line do |line|
-    if mode == "stacks"
+if mode == "stacks"
+    DATA.each_line do |line|
         if line==" 1   2   3   4   5   6   7   8   9 \n"
             mode = "middle"
             next
@@ -45,14 +45,14 @@ DATA.each_line do |line|
                     $stack_pt2[x] = [] if $stack_pt2[x].nil?
                     # puts "data[x][#{y}] -> <#{data[y][x]}>"
                     if data[y][x] != " "
-                        $stack_pt1[x].append(data[y][x]) 
-                        $stack_pt2[x].append(data[y][x]) 
+                        $stack_pt1[x].append(data[y][x])
+                        $stack_pt2[x].append(data[y][x])
                     end
                 end
             end
         end
         printStacks
-        
+
         mode = "commands"
         next
     elsif mode == "commands"
@@ -76,7 +76,7 @@ DATA.each_line do |line|
         # puts "stack[from]: #{$stack_pt1[from]}"
         # puts "stack[to]: #{$stack_pt1[to]}"
         printStacks
-        
+
     end
 
 end
@@ -94,16 +94,16 @@ puts "PART 1, TOP OF STACKS: #{top_pt1}"
 puts "PART 2, TOP OF STACKS: #{top_pt2}"
 
 __END__
-[N] [G]                     [Q]    
-[H] [B]         [B] [R]     [H]    
-[S] [N]     [Q] [M] [T]     [Z]    
+[N] [G]                     [Q]
+[H] [B]         [B] [R]     [H]
+[S] [N]     [Q] [M] [T]     [Z]
 [J] [T]     [R] [V] [H]     [R] [S]
 [F] [Q]     [W] [T] [V] [J] [V] [M]
 [W] [P] [V] [S] [F] [B] [Q] [J] [H]
 [T] [R] [Q] [B] [D] [D] [B] [N] [N]
 [D] [H] [L] [N] [N] [M] [D] [D] [B]
- 1   2   3   4   5   6   7   8   9 
- 
+ 1   2   3   4   5   6   7   8   9
+
 move 3 from 1 to 2
 move 1 from 7 to 1
 move 1 from 6 to 5
