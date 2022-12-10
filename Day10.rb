@@ -3,19 +3,17 @@
 #pt 1 13:02
 #pt 2 13:43
 
-#BUT VHOLD and pt1 is now wrong
-# should be 14320
 #pt should be PCPBKAPJ
 
 class Clock
   def initialize(computer)
     $computer = computer
     $computer.setClock(self)
-    $cycle = 0
+    $cycle = 1
   end
   def cycle()
-    $cycle+=1
     $computer.display.cycle()
+    $cycle+=1
     if $cycle == 20
       $computer.cpu.addSignalStrength()
     elsif ($cycle-20).modulo(40) == 0
@@ -32,7 +30,6 @@ class CPU
   def initialize(computer)
     $computer = computer
     $computer.setCPU(self)
-    # $clock = computer.clock
     @regX = 1
     $importants = []
   end
@@ -74,12 +71,13 @@ class Display
   end
   def cycle()
     cycle = $computer.clock.getCycle()
+    x = $computer.cpu.regX
     linePos = cycle.modulo(40)
-    if (cycle-1).modulo(40) == 0 #start of line
+# puts "cycle: <#{cycle}>"
+# raise
+    if (cycle).modulo(40) == 1  #start of line
       print "Cycle " + ("%03d" % cycle) + " -> "
     end
-    x = $computer.cpu.regX
-    # puts "|#{x}/#{linePos}"
     if (x-1==linePos || x==linePos || x+1==linePos)
       print "██"
     else
@@ -91,7 +89,6 @@ class Display
     end
   end
 end
-
 
 computer = Computer.new()
 cpu = CPU.new(computer)
